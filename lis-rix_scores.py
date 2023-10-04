@@ -1,6 +1,13 @@
 '''
-HEY bobby
+LIX
+This script calculates the readability index of some text: Just paste it into the box below and remember not to include the headings. "LIX" or readability index is a measure of how hard a text is to read. It is defined as the percentage of words longer than six letters plus the average number of words per sentence. The following outline shows what the index you will get tells you about your text:
 
+LIX < 20: it is very easy to read
+LIX < 30: it is easy to read
+LIX < 40: it is a little hard to read
+LIX < 50: it is hard to read
+LIX < 60: it is very hard to read
+Note: This applies only to languages where LIX is applicable. These include Danish, Swedish, Norwegian (Bokmål and Nynorsk), as well as Dutch.
 
 '''
 
