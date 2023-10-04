@@ -62,7 +62,16 @@ def calculate_rix(text):
     return rix
 
 def process_pdfs_in_folder(folder_path):
-    data = {"PDF Name": [], "LIX Score": [], "RIX Score": [], "Unique Words (no stopwords)": [], "Nouns": [], "Verbs": [], "Adjectives": []}
+    data = {
+        "PDF Name": [],
+        "LIX Score": [],
+        "RIX Score": [],
+        "Unique Words (no stopwords)": [],
+        "Nouns": [],
+        "Verbs": [],
+        "Adjectives": [],
+    }   
+    
     pdf_files = [file for file in os.listdir(folder_path) if file.lower().endswith('.pdf')]
     
     for pdf_file in tqdm(pdf_files, desc="Processing PDFs"):
