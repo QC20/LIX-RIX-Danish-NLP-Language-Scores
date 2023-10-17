@@ -1,7 +1,7 @@
 # LIX-RIX Danish NLP Language Scores
 
 ## LIX
-This script calculates the readability index of text. Just paste your text into the input box below, excluding any headings. The LIX, or readability index, measures how difficult a text is to read. It is calculated as the percentage of words longer than six letters plus the average number of words per sentence.
+This script calculates the readability index of text. The LIX, or readability index, measures how difficult a text is to read. It is calculated as the percentage of words longer than six letters plus the average number of words per sentence.
 
 ### What the LIX Index Indicates
 - LIX < 20: Very easy to read.
