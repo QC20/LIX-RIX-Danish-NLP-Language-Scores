@@ -12,6 +12,9 @@ Lix and Rix are two readability formulas designed to assess the readability of t
   - [How to Use the Script](#how-to-use-the-script)
     - [Dependencies](#dependencies)
   - [Usage](#usage)
+  - [Lix and Rix Score Interpretation](#lix-and-rix-score-interpretation)
+  - [Contributing](#contributing)
+  - [License](#license)
 
 ## What are Lix and Rix?
 
@@ -48,5 +51,33 @@ You can install these dependencies using `pip`:
 
 ```shell
 pip install PyPDF2 pandas tqdm spacy
+```
 
 ## Usage
+- Place your PDF files in a folder.
+- Update the folder_path variable in the script to the path of your folder containing PDFs.
+
+Run the script:
+```shell
+python readability_calculator.py
+```
+
+- The script will process the PDFs in the specified folder and create an Excel file with Lix and Rix scores, unique word counts, and parts of speech analysis.
+
+## Lix and Rix Score Interpretation
+The Lix score and Rix score indicate the readability of text. The thresholds for interpretation are as follows:
+
+LIX < 20: Very easy to read.
+LIX < 30: Easy to read.
+LIX < 40: A little hard to read.
+LIX < 50: Hard to read.
+LIX < 60: Very hard to read.
+Please note that these thresholds apply only to languages where Lix is applicable, including Danish, Swedish, Norwegian (Bokmål and Nynorsk), and Dutch.
+
+## Contributing
+If you have improvements or bug fixes for the script or would like to contribute to the documentation, feel free to create a pull request. We welcome contributions from the community!
+
+## License
+This project is licensed under the MIT License. See the LICENSE file for details.
+
+Make sure to update the paths and dependencies sections to include the specific details needed to run your script. Additionally, if your script has any specific installation or usage requirements, you should provide instructions in the README.
