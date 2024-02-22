@@ -3,7 +3,6 @@ import re
 import PyPDF2
 import pandas as pd
 from tqdm import tqdm
-
 from text_analyzer import TextAnalyzer
 
 class PDFProcessor:
