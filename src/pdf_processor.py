@@ -17,6 +17,12 @@ class PDFProcessor:
                 text += page.extract_text()
         return text
 
+    def count_paragraph_and_section(self, text):
+        # Count occurrences of "paragraf" and "§"
+        paragraph_count = text.lower().count("paragraf")
+        section_count = text.count("§")
+        return paragraph_count, section_count
+
     def process_pdfs_in_folder(self):
         data = {
             "PDF Name": [],
@@ -26,6 +32,8 @@ class PDFProcessor:
             "Nouns": [],
             "Verbs": [],
             "Adjectives": [],
+            "Paragraph Count": [],
+            "Section Count": []
         }   
         
         pdf_files = [file for file in os.listdir(self.folder_path) if file.lower().endswith('.pdf')]
@@ -40,6 +48,7 @@ class PDFProcessor:
             rix_score = text_analyzer.calculate_rix()
             unique_word_count = text_analyzer.count_unique_words()
             nouns, verbs, adjectives = text_analyzer.analyze_pos()
+            paragraph_count, section_count = self.count_paragraph_and_section(extracted_text)
 
             data["PDF Name"].append(pdf_name)
             data["LIX Score"].append(f"{lix_score:.2f}")
@@ -48,7 +57,9 @@ class PDFProcessor:
             data["Nouns"].append(nouns)
             data["Verbs"].append(verbs)
             data["Adjectives"].append(adjectives)
+            data["Paragraph Count"].append(paragraph_count)
+            data["Section Count"].append(section_count)
 
         df = pd.DataFrame(data)
-        excel_file = "pdf_lix_rix_wordcount_pos_scores.xlsx"
+        excel_file = "pdf_lix_rix_wordcount_pos_paragraph_section_scores.xlsx"
         df.to_excel(excel_file, index=False)
