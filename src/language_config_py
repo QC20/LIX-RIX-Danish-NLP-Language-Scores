@@ -1,0 +1,205 @@
+"""
+language_config.py
+------------------
+Per-language settings for the readability calculator.
+
+Supported languages
+    da  Danish
+    sv  Swedish
+    nb  Norwegian Bokmål
+    nl  Dutch
+
+Score interpretation tables are defined here so that all modules
+share a single source of truth.
+"""
+
+from __future__ import annotations
+
+# ---------------------------------------------------------------------------
+# Thresholds
+# ---------------------------------------------------------------------------
+
+# Björnsson (1968) uses > 6 characters for Scandinavian languages.
+LIX_LONG_WORD_THRESHOLD = 6
+
+# Anderson (1983) uses > 7 characters.
+RIX_LONG_WORD_THRESHOLD = 7
+
+# ---------------------------------------------------------------------------
+# LIX interpretation bands
+# ---------------------------------------------------------------------------
+
+LIX_BANDS = [
+    {
+        "max": 20,
+        "label": "Very easy",
+        "typical_text": "Children's books, simple instructions",
+        "hex": "#27AE60",
+    },
+    {
+        "max": 30,
+        "label": "Easy",
+        "typical_text": "Fiction, popular non-fiction",
+        "hex": "#2ECC71",
+    },
+    {
+        "max": 40,
+        "label": "Moderate",
+        "typical_text": "Newspapers, general magazines",
+        "hex": "#F1C40F",
+    },
+    {
+        "max": 50,
+        "label": "Difficult",
+        "typical_text": "Academic papers, technical reports",
+        "hex": "#E67E22",
+    },
+    {
+        "max": 60,
+        "label": "Very difficult",
+        "typical_text": "Scientific literature, legal texts",
+        "hex": "#E74C3C",
+    },
+    {
+        "max": float("inf"),
+        "label": "Extremely difficult",
+        "typical_text": "Specialist research, regulatory documents",
+        "hex": "#922B21",
+    },
+]
+
+# ---------------------------------------------------------------------------
+# RIX grade-level mapping (Anderson, 1983)
+# ---------------------------------------------------------------------------
+
+RIX_GRADE_LEVELS = [
+    {"max": 0.20, "grade": "1"},
+    {"max": 0.50, "grade": "2"},
+    {"max": 0.80, "grade": "3"},
+    {"max": 1.30, "grade": "4"},
+    {"max": 1.80, "grade": "5"},
+    {"max": 2.40, "grade": "6"},
+    {"max": 3.00, "grade": "7"},
+    {"max": 3.70, "grade": "8"},
+    {"max": 4.50, "grade": "9"},
+    {"max": 5.30, "grade": "10"},
+    {"max": 6.20, "grade": "11"},
+    {"max": 7.20, "grade": "12"},
+    {"max": float("inf"), "grade": "College+"},
+]
+
+# ---------------------------------------------------------------------------
+# Per-language settings
+# ---------------------------------------------------------------------------
+
+LANGUAGE_CONFIGS: dict[str, dict] = {
+    "da": {
+        "name": "Danish",
+        "spacy_model": "da_core_news_sm",
+        "stop_words": {
+            "og", "i", "jeg", "det", "at", "en", "den", "til", "er", "som",
+            "på", "de", "med", "han", "af", "for", "ikke", "der", "var", "mig",
+            "sig", "men", "et", "har", "om", "vi", "min", "havde", "ham", "hun",
+            "nu", "over", "da", "fra", "du", "ud", "sin", "dem", "os", "op",
+            "man", "hans", "hvor", "eller", "hvad", "skal", "selv", "her", "alle",
+            "vil", "blev", "kunne", "ind", "når", "være", "dog", "noget", "ville",
+            "jo", "deres", "efter", "ned", "skulle", "denne", "end", "dette", "mit",
+            "også", "under", "have", "dig", "anden", "hende", "mine", "alt", "meget",
+            "sit", "sine", "vor", "mod", "disse", "hvis", "din", "nogle", "hos",
+            "blive", "mange", "ad", "bliver", "hendes", "været", "ingen", "samme",
+            "andet", "sådan", "netop", "lige", "mere", "mest", "kan", "må",
+        },
+    },
+    "sv": {
+        "name": "Swedish",
+        "spacy_model": "sv_core_news_sm",
+        "stop_words": {
+            "och", "i", "jag", "det", "att", "en", "den", "till", "är", "som",
+            "på", "de", "med", "han", "av", "för", "inte", "där", "var", "mig",
+            "sig", "men", "ett", "har", "om", "vi", "min", "hade", "honom", "hon",
+            "nu", "över", "då", "från", "du", "ut", "sin", "dem", "oss", "upp",
+            "man", "hans", "var", "eller", "vad", "ska", "själv", "här", "alla",
+            "vill", "blev", "kunde", "in", "när", "vara", "dock", "något", "ville",
+            "ju", "deras", "efter", "ner", "skulle", "denna", "än", "detta", "mitt",
+            "också", "under", "ha", "dig", "annan", "henne", "mina", "allt", "mycket",
+            "sitt", "sina", "vår", "mot", "dessa", "om", "din", "några", "hos",
+            "bli", "många", "av", "blir", "hennes", "varit",
+        },
+    },
+    "nb": {
+        "name": "Norwegian Bokmål",
+        "spacy_model": "nb_core_news_sm",
+        "stop_words": {
+            "og", "i", "jeg", "det", "at", "en", "den", "til", "er", "som",
+            "på", "de", "med", "han", "av", "for", "ikke", "der", "var", "meg",
+            "seg", "men", "et", "har", "om", "vi", "min", "hadde", "ham", "hun",
+            "nå", "over", "da", "fra", "du", "ut", "sin", "dem", "oss", "opp",
+            "man", "hans", "hvor", "eller", "hva", "skal", "selv", "her", "alle",
+            "vil", "ble", "kunne", "inn", "når", "være", "dog", "noe", "ville",
+            "jo", "deres", "etter", "ned", "skulle", "denne", "enn", "dette", "mitt",
+            "også", "under", "ha", "deg", "annen", "henne", "mine", "alt", "mye",
+            "sitt", "sine", "vår", "mot", "disse", "hvis", "din", "noen", "hos",
+            "bli", "mange", "av", "blir", "hennes", "vært",
+        },
+    },
+    "nl": {
+        "name": "Dutch",
+        "spacy_model": "nl_core_news_sm",
+        "stop_words": {
+            "de", "en", "van", "ik", "te", "dat", "die", "in", "een", "hij",
+            "het", "niet", "zijn", "is", "was", "op", "aan", "met", "als", "voor",
+            "had", "er", "maar", "om", "hem", "dan", "zou", "of", "wat", "mijn",
+            "men", "dit", "zo", "door", "over", "ze", "zich", "bij", "ook", "tot",
+            "je", "mij", "uit", "der", "daar", "haar", "naar", "heb", "hoe", "heeft",
+            "hebben", "deze", "u", "want", "nog", "zal", "me", "zij", "nu", "ge",
+            "geen", "omdat", "iets", "worden", "toch", "al", "waren", "veel", "meer",
+            "doen", "toen", "moet", "ben", "zonder", "kan", "hun", "dus", "alles",
+            "onder", "ja", "eens", "hier", "wie", "werd", "altijd", "doch", "wordt",
+            "wezen", "kunnen", "ons", "zelf", "tegen", "na", "reeds", "wil", "kon",
+            "niets", "uw", "iemand", "geweest", "andere",
+        },
+    },
+}
+
+# Short codes accepted on the command line and their canonical key
+LANGUAGE_ALIASES: dict[str, str] = {
+    "danish": "da",
+    "swedish": "sv",
+    "norwegian": "nb",
+    "bokmål": "nb",
+    "dutch": "nl",
+    "da": "da",
+    "sv": "sv",
+    "nb": "nb",
+    "nl": "nl",
+}
+
+# ---------------------------------------------------------------------------
+# Helper functions
+# ---------------------------------------------------------------------------
+
+def resolve_language(code: str) -> str:
+    """Return canonical language key from an alias or raise ValueError."""
+    key = LANGUAGE_ALIASES.get(code.lower())
+    if key is None:
+        supported = ", ".join(sorted(LANGUAGE_ALIASES))
+        raise ValueError(
+            f"Unsupported language '{code}'. Supported values: {supported}"
+        )
+    return key
+
+
+def interpret_lix(score: float) -> dict:
+    """Return the LIX interpretation band for *score*."""
+    for band in LIX_BANDS:
+        if score < band["max"]:
+            return band
+    return LIX_BANDS[-1]
+
+
+def interpret_rix(score: float) -> str:
+    """Return the estimated school grade level for *score*."""
+    for level in RIX_GRADE_LEVELS:
+        if score <= level["max"]:
+            return level["grade"]
+    return RIX_GRADE_LEVELS[-1]["grade"]
